@@ -1,4 +1,5 @@
 """
+Given a binary tree, return the preorder traversal of its nodes' values.
 Input: [1,null,2,3]
    1
     \
@@ -6,7 +7,7 @@ Input: [1,null,2,3]
     /
    3
 
-Output: [1,3,2]
+Output: [1,2,3]
 """
 from typing import List
 # Definition for a binary tree node.
@@ -18,16 +19,16 @@ class TreeNode:
     def __repr__(self):
         return "TreeNode(%s, %s, %s)"%(self.val, self.left, self.right)
 class Solution:
-    def inorderTraversal(self, root: TreeNode, t=None) -> List[int]:
-        if t is None:
-            t = []
-        if root and root.left:
-            self.inorderTraversal(root.left, t)
+    def preorderTraversal(self, root: TreeNode, val=None) -> List[int]:
+        if val is None:
+            val = []
         if root and root.val:
-            t.append(root.val)
+            val.append(root.val)
+        if root and root.left:
+            self.preorderTraversal(root.left, val)
         if root and root.right:
-            self.inorderTraversal(root.right, t)
-        return t
+            self.preorderTraversal(root.right, val)
+        return val
 if __name__=="__main__":
     root = TreeNode(1)
     root.left = None
@@ -36,6 +37,6 @@ if __name__=="__main__":
      
     print(root)
     t = Solution()
-    print(t.inorderTraversal(root))
+    print(t.preorderTraversal(root))
     
 
