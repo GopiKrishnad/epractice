@@ -2,7 +2,7 @@ A tree is one of the data structure and it has one node as root and list of othe
 Binary tree is one of the most typical tree structure. As the name suggests,a binary tree is a tree datastructure
 each node has atmost two children, which is referred as left child and the right child.
 
-##Tree Traversing
+## Tree Traversing
 
 * Pre-Order
 * In Order
