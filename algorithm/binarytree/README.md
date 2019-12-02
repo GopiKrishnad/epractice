@@ -8,13 +8,13 @@ each node has atmost two children, which is referred as left child and the right
 * In Order
 * Post-Order
 
-#Pre-Order:(root, left, right)
+###### Pre-Order:(root, left, right)
 In this traversal is to visit the root first. Then traverse the left sub tree. Finally, traverse the right sub tree.
 
-#In Order:(left, root, right)
+###### In Order:(left, root, right)
 In this traversal is to visit left sub tree first. Then visit at the root. Finally, traverse the right sub tree.
 
-#Post Order:(left, right, root)
+###### Post Order:(left, right, root)
 In this traversal is to visit left sub tree first. Then traverse the right sub tree. Finally, traverse the root.
 
 
