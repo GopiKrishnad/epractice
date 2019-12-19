@@ -29,6 +29,23 @@ class Solution:
         if root and root.right:
             self.preorderTraversal(root.right, val)
         return val
+    def preorderTraversal(self, root: TreeNode) -> List[int]:
+        # we use the stack here to hold all the current root nodes which 
+        # will be used for backtracking.
+        stack = []
+        current  = root
+        while True:  # Loop until all left and right nodes are traversed or current node is None
+            if current:
+                stack.append(current)  # collect all left nodes
+                current = current.left  # Traverse to all left nodes
+            elif stack:
+                current = stack.pop()
+                print(current.val)
+                current = current.right
+            else:
+                break
+
+
 if __name__=="__main__":
     root = TreeNode(1)
     root.left = None
