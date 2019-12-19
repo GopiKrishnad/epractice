@@ -1,10 +1,11 @@
 """Write code to remove repeated element from an unsorted linked list"""
 
 
-def remove_item(node):
+def remove_item(l):
+    node = l.head
     d = {}
     prev = node
-    while node.next is not None:  # Iterate as long as there is a next item
+    while node.next is not None or node is l.tail:  # Iterate as long as there is a next item
         if d.get(node.val):
             prev.next = node.next
         else:
@@ -34,6 +35,7 @@ if __name__ == "__main__":
     class LinkedList(object):
         def __init__(self):
             self.head = None
+            self.tail = None
 
         def add(self, node):
             if self.head is None:
@@ -43,6 +45,8 @@ if __name__ == "__main__":
                 while y.next is not None:
                     y = y.next
                 y.next = node
+                self.tail = node
+
         def __repr__(self):
             return 'Node(%s, %s)' % (self.head.val, self.head.next)
 
