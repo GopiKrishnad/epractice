@@ -8,7 +8,7 @@ Given two stings, write a method to decide if one is permutation of other.
 def perm(s, t):
     if len(s) != len(t):
         return False
-    return ''.join(sorted(s)) == ''.join(sorted(q))
+    return ''.join(sorted(s)) == ''.join(sorted(t))
 
 
 def perm(s, t):
