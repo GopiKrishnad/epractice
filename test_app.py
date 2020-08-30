@@ -1,4 +1,5 @@
 """
+8
 2017-01-03,16:18:50,AAPL,142.64
 2017-01-03,16:25:22,AMD,13.86
 2017-01-03,16:25:25,AAPL,141.64
@@ -33,26 +34,24 @@ class DayTrade(object):
     def __init__(self, trading_date, day_trades):
         self.trading_date = trading_date
         self.day_trades = [trade for trade in day_trades]
-        # self.last_quote = day_trades[-1][1]
-        # self.valid_quote = len(day_trades)
+        self.last_quote = self.day_trades[-1][1]
+        self.valid_quotes = len(self.day_trades)
         self.most_active_hour = statistics.mode([trade[1].split(':')[0] for trade in self.day_trades])
         self.most_active_symbol = statistics.mode([trade[2] for trade in self.day_trades])
-
-        # self.group_by_symbol = itertools.groupby(self.day_trades, lambda x: x[2])
 
     def report(self):
         day_trades = sorted(self.day_trades, key=lambda x: x[2])
         group_by_symbol = itertools.groupby(day_trades, lambda x: x[2])
+        print('Trading Day = {0}'.format(self.trading_date))
+        print('Last Quote Time = {0}'.format(self.last_quote))
+        print('Number of valid quotes = {0}'.format(self.valid_quotes))
+        print('Most active hour = {0}'.format(self.most_active_hour))
+        print('Most active symbol = {0}'.format(self.most_active_symbol))
         for group in group_by_symbol:
             symbol, trades = group
             trades = [trade for trade in trades]
             last_record = trades[-1]
             zip_data = [trade for trade in zip(*trades)][3]
-            print('Trading Day = {0}'.format(self.trading_date))
-            print('Last Quote Time = {0}'.format(self.))
-            print('Number of valid quotes = {0}'.format())
-            print('Most active hour = {0}'.format())
-            print('Most active symbol = {0}'.format())
             print(last_record[0], last_record[1], "{0},{1},{2}".format(symbol, max(zip_data), min(zip_data)))
 
 
@@ -72,10 +71,8 @@ class TradeData(object):
 
     def gen_report(self):
         trades_by_day = self.divide_trades_by_session()
-        import pdb;pdb.set_trace()
         for day in trades_by_day:
             DayTrade(*day).report()
-            break
 
 
 if __name__ == "__main__":
@@ -84,7 +81,5 @@ if __name__ == "__main__":
     for _ in range(n):
         t = input().split(',')
         ar.append(t)
-    #print(ar)
     tr = TradeData(ar)
     tr.gen_report()
-
