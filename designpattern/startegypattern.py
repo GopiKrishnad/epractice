@@ -75,12 +75,27 @@ class LargeOrderPromo(Promotion):  # third Concrete strategy
         return 0
 
 
+class BestOrderPromo:
+    """promotion applied based on max discount"""
+    def __init__(self):
+        self.promotions = [FidelityPromo, BulkItemPromo, LargeOrderPromo]
+
+    def discount(self, order: Order) -> float:
+        return max(promotion.discount(self, order) for promotion in self.promotions)
+
+
 if __name__ == "__main__":
     joe = Customer('John Doe',  0)
     ann = Customer('Ann Smith',  1100)
-    cart = [LineItem('banana', 4, .5), LineItem('apple', 10, 1.5), LineItem('watermellon', 5, 5.0),
+    cart = [LineItem('banana', 4, .5), LineItem('apple', 20, 1.5), LineItem('watermellon', 5, 5.0),
             LineItem('mango', 5, 6.0), LineItem('jack', 5, 5.5), LineItem('biki', 5, 1.5),
             LineItem('jiki', 5, 7.0), LineItem('tiki', 5, 8.0), LineItem('liki', 5, 6.0),
             LineItem('greenapple', 5, 9.0)]
-    print(Order(joe, cart, FidelityPromo()))
+    print(Order(joe, cart[:5], FidelityPromo()))
     print(Order(ann, cart, FidelityPromo()))
+    print(Order(joe, cart[:5], BulkItemPromo()))
+    print(Order(ann, cart, BulkItemPromo()))
+    print(Order(joe, cart[:5], LargeOrderPromo()))
+    print(Order(ann, cart, LargeOrderPromo()))
+    print(Order(joe, cart[:5], BestOrderPromo()))
+    print(Order(ann, cart, BestOrderPromo()))
