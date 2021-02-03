@@ -1,0 +1,1 @@
+map(lambda l:(l[0],eval('t.'+l[1])), map(lambda x: (x, re.findall('[\w\.\w]+', x)[0]), re.findall('[@{[\w\.\w]+}', q)))
